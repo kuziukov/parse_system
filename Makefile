@@ -11,19 +11,8 @@ CHECK_CMD=sh -c "pre-commit run isort -a && \
 			pre-commit run bandit && \
 			pre-commit run yamllint -a"
 
-
-.PHONY: help
-help:
-	@egrep -h '\s##\s' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-40s\033[0m %s\n", $$1, $$2}'
-
-init:
-	echo "Initialized"
-
 run:
 	celery -A src.main.app worker -B -l info -Q common
-
-run-test:
-	python src/test.py
 
 test:
 	$(TEST_CMD)

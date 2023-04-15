@@ -55,12 +55,11 @@ class ApkMirror:
         Метод request_page_links
         Получает список страниц, доступных для перехода
 
-        Пример: {'/uploads/page/2/', '/uploads/page/3/', '/uploads/page/3/'}
+        Пример: {'/uploads/page/2/', '/uploads/page/3/', '/uploads/page/4/'}
         :param path: str - путь по которому получаем список страниц
         :return: set[str] - список доступных страниц
         """
-        content = self._client.do_request(path)
-        if not content:
+        if not (content := self._client.do_request(path)):
             return set()
 
         page = ApkMirrorPage(content=content)
@@ -87,15 +86,14 @@ class ApkMirror:
 
         if self.is_release_url(path):
             urls = self.filter_download_urls(urls)
-            return reduce_list_of_urls([self.request_page(url, recursive) for url in urls]) if recursive else urls
 
         elif self.is_download_url(path):
             urls = self.filter_download_key_urls(urls)
-            return reduce_list_of_urls([self.request_page(url, recursive) for url in urls]) if recursive else urls
 
         elif self.is_download_key_url(path):
             return self.filter_download_link_urls(urls)
 
         else:
             urls = self.filter_release_urls(urls)
-            return reduce_list_of_urls([self.request_page(url, recursive) for url in urls]) if recursive else urls
+
+        return reduce_list_of_urls([self.request_page(url, recursive) for url in urls]) if recursive else urls

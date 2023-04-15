@@ -54,4 +54,4 @@ repos:
     hooks:
       - id: xenon
         args: [-bB, -mB, -aA]
-        exclude: '^(tests/|.*vkad_code|plarin_connect_mt/db/startup.py).*$'
+        exclude: '^(tests/).*$'
