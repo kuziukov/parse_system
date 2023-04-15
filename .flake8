@@ -1,0 +1,30 @@
+[flake8]
+max-line-length = 120
+exclude = build/*, dist/*, .venv/*, .git/*, .eggs/*
+# ignore = E203  # E203 conflicts with PEP8; see https://github.com/psf/black#slices
+ignore = C101, D100, D101, D102, W503, C819, B008
+max-complexity = 10
+statistics = true
+doctests = True
+
+# Flake plugins:
+inline-quotes = single
+accept-encodings = utf-8
+docstring-convention = pep257
+
+# flake8-pytest-style
+# PT001:
+pytest-fixture-no-parentheses = true
+# PT006:
+pytest-parametrize-names-type = tuple
+# PT007:
+pytest-parametrize-values-type = tuple
+pytest-parametrize-values-row-type = tuple
+
+# Black
+# ignore = E203, E266, E501, W503, F403, F401
+select = B,C,E,F,W,T4,B9
+
+# flake8-rst-docstrings
+rst-roles = class, func, def
+rst-directives = envvar, exception
