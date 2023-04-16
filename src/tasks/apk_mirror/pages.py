@@ -24,7 +24,7 @@ class TaskApkMirrorPages(Task):
 
         urls = parser.request_page_links('/')
         max_page_number = max([parser.get_page_link_num(url) for url in urls])
-        max_page_number = 2
+        # max_page_number = 2
         for num in range(1, max_page_number):
             TaskApkMirrorPage().apply_async([f'/uploads/page/{num}/'])
         return
